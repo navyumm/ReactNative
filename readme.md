@@ -66,3 +66,20 @@ then we will use useEffect hook it allow us to perform some action while page or
 ---
 after this we SplashScreen.preventAutoHideAsync()
 this will prevent the splash auto hidding before assest loading is complete
+---
+
+
+
+then we create (auth) folder in app
+we write floder name in perenthsis which means that in contains all routes 
+like: ( signIn, SignUp and more)
+
+in this folder we create a seprate layout because of only in this routes there is no tab options to navigate
+
+---
+then we create ( tabs ) folder, where we can again store routes of tabs are are used to do navigate also here is _layout file for tabs enabled
+
+---
+ then we create serach folder that are used to do dynamic routing
+ in this we create a [querry].jsx file 
+ who's handle random querry or specific search user is tryying to do
