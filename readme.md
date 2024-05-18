@@ -54,3 +54,15 @@ or we can also use npm install twrnc
 ---
 
 added colors and fonts to tailwind.config
+
+--- 
+after that we added images and fonts to the assets folder after that we import this on constants folder and exporting index.js file from there.
+
+--- 
+then we imported all fonts in layout file via useFonts hook
+
+---
+then we will use useEffect hook it allow us to perform some action while page or screen is loading
+---
+after this we SplashScreen.preventAutoHideAsync()
+this will prevent the splash auto hidding before assest loading is complete
