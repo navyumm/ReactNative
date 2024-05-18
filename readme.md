@@ -47,3 +47,10 @@ and we will return to our home page and make /profile via importing Link
 ```
 <Link href="/profile" style={{ color: 'blue' }}>Go to Profile</Link>
 ```
+
+---
+now we will add tailwind css styling for this we will use NativeWind 
+or we can also use npm install twrnc
+---
+
+added colors and fonts to tailwind.config
