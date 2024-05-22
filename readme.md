@@ -93,4 +93,13 @@ now we import {Tabs, Redireact} and use it for showing home, create, profile etc
 ---
 
 
+after that we returns <Tabs> for showing icons on screen then in tabs we create <Tabs.Screen > in which we sets the name, icons etc of tab and styles related props
+
+we copy this for 3 more times for 3 more tabs
+
+then we create TabIcon function for styling like place items in center and more
+
+then we set screenOption in tabs where we can sets ours tab bar color height and more
+----
+
 
