@@ -83,3 +83,14 @@ then we create ( tabs ) folder, where we can again store routes of tabs are are 
  then we create serach folder that are used to do dynamic routing
  in this we create a [querry].jsx file 
  who's handle random querry or specific search user is tryying to do
+
+---
+
+we are almost done with our file structure but here is no way to navigating between these routes
+
+---
+now we import {Tabs, Redireact} and use it for showing home, create, profile etc on tabs section
+---
+
+
+
