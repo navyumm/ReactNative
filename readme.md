@@ -103,3 +103,24 @@ then we set screenOption in tabs where we can sets ours tab bar color height and
 ----
 
 
+---
+
+now we come on our starting page or index file 
+and now we will use SafeAreaView, so that our contact doen't flow outside the screen.
+after that we set <scrollView> height to 100%, so that our page will become scrollable.
+the reason of using this if our content will be larger so that it can be scrollable on all types of screen
+
+--- 
+
+then we add logo, cards, some text and a button on main index file
+for the button component we crreate a seprate components file 
+
+where we can use <TouchableOpacity> for button which means that now we are able to touch button
+than we create a function or component and destructure button props and use it
+
+and we also use routing for navigate one page to another
+
+---
+
+
+
