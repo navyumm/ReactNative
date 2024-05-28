@@ -122,5 +122,34 @@ and we also use routing for navigate one page to another
 
 ---
 
+after the starting page we hum sign-In page par kaam karenge 
+So, sabse phle starting page ke custom button se sign-in page 
+
+ab sign page pr aakr, sabse phle return me SafeAreaView karenge, aur scrolling ke liye 
+<ScroolView> lagya taaki pure page me acche se scrolling ki jaa sake
+
+ab humne phle logo set kiya, fir form me Email or password lene ke liye, 
+FontField ka alg se component bna liya 
+fir usko import kar liya sign-In page me
+aur usme title, value, baaki sb set kar diya 
+
+last me custom button ko call karwa kar usme 
+sign-Up page ka path de diya
+
+---
+ 
+<FontField> component me humne text, aur TextInput liya :
+TextInput me humne placeholder, secureTextEntry, onChangeText, value set kiya
+
+fir humne title or password ka compare karwaya, if dono same nikale toh ke function onPress par ek function lagaya jo humse useState se aayega setShowPasswors jo ye check karega ki showPassword dikh rha h ya nhi
+aur agr nhi dikh rha toh udhr eye ka icon lga denge
+
+----
+
+signIn page ready karne ke baad, same code signUp me copy kardo,
+bss waha pr ek chij or add kari hai, username
+baaki chij as requirement change karli hai
+
+---
 
 

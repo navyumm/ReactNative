@@ -57,10 +57,10 @@ const SignIn = () => {
                     />
 
                     <View className="justify-center pt-5 flex-row gap4">
-                    <Text className="text-gray-100 text-lg font-pregular">Don't have an account? </Text>
+                    <Text className="text-gray-100 text-[16px] font-pregular">Don't have an account? </Text>
                     
                     <Link href="/sign-up"
-                    className="text-lg font-psemibold text-secondary-100">
+                    className="text-[16px] font-psemibold text-secondary-100">
                     Sign up
                     </Link>
 

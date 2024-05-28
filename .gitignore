@@ -36,3 +36,4 @@ yarn-error.*
 
 # readme file
 *./readme.md
+*.readme.md
