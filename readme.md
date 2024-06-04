@@ -153,3 +153,83 @@ baaki chij as requirement change karli hai
 ---
 
 
+ab hum appWrite ka use karke logic implement karenge ki actual me chije kaise work karengi, jissai hum proper way me register aur logIn kar sake.
+
+---
+
+sbse phle appwrite me login karke ek new project create kar lenge,
+then Overview me se sbse phle id ko copy karke lib file me appwriteConfig me projectId me paste kar denge.
+
+fir ek database create kar lenge aur uski id bhi paste kar denge, aur fir database ke andr 2 collections bna lenge users or videos ke naam se
+aur inki bhi id paste kar denge
+fir inke andr attributes bna lenge jo jo hume chahiye unka type select karke 
+
+fir last me storage waale option me jaakr ek bucket create kar lenge
+or uski id bhi paste kar denge
+
+----
+
+ab iske baad [appwrite](https://github.com/appwrite/sdk-for-react-native)
+
+setup follow kar lena hai..
+
+`
+export const createUser = () => {
+    // Register User
+    account.create(ID.unique(), 'me@example.com', 'password', 'Jane Doe')
+        .then(function (response) {
+            console.log(response);
+        }, function (error) {
+            console.log(error);
+        });
+}
+`
+
+setup karne ke baad jaise hi hum signUp pr tap karenge hume kuch data show hoga terminal pr and appwrite pr ek user ka data aa jaayega 
+
+ab iss user ke data ko delete karke 
+hum apna real user create karenge
+
+---
+
+apna user create karne ke liye hume apne according Register user set karna pdega 
+jisko hum tryCatch me le lenge
+fir hume jo jo chahiye newAccount bna kar usme likh denge
+or check kar lenge agar kahiii newAccount phle se toh exist to nhi karta 
+agr karta hai toh new error throw kar denge
+
+agr nhi karta toh avatar me uska username le lenge\
+signIn me email, password
+
+or fir ek newUser bna denge jo database se connected hoga
+or usme sbkuch reassign kar denge
+or newUser ko return kar denge
+
+ab sign-up page par aayenge
+or udhr sara setup karenge submit function me, ki agr jo jo hume chahiye vo nhi h toh error varna cretae 
+and router ka use karke home page pr bhej denge
+
+---
+
+lekin ab kya ho rhahai jaise hi hum account create karke login karte hai fir back karte hai, to fir se home page aa jata hai aur home page ke baad fir se sign-In and sign-Up page aa jata hai .
+
+lekin agr hum login hai toh already toh hume in sbki ki need hi nhi honi chahiye.
+
+isiliye ab hum ik nya folder bnayange context ke naam se aur usmeGlobalProvider ke naam se file banai
+
+fir globalProvider function bnayenge jo ye check karega ki user phle se loggedIn hai ya nhi
+
+fir main _layout me jakr stack ko globalProvider is wrap kar denge
+
+fir main page ke index pr aakr function ke andr 
+```
+   const { isLoading, isLoggedIn } = useGlobalContext();
+
+    if(!isLoading && isLoggedIn) return <Redirect href="/home" />
+```
+likh denge
+
+
+* That's it ab hmara login aaram se hi har tarike se work karne ko ready hai.
+
+---
