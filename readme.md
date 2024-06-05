@@ -233,3 +233,51 @@ likh denge
 * That's it ab hmara login aaram se hi har tarike se work karne ko ready hai.
 
 ---
+
+# Starting from home page
+
+login karne ke baad hum home screen par aayenge or sbse phle 
+safeAreaview me wrap karenge
+ wrap karne ke baad hum iss baar <FlatList> ka use karenge
+<ScrollView> ki jagah kyoki, 
+FlatList ke sath hum horizantal scrolling ke sath sath vertical scroll bhi kar sakte hai,
+scroll view me aisa directly nhi use hota
+
+<FlatList> me hum 3 attributes le rhe hai
+1. data
+2. renderItem
+3. keyExtractor
+
+iske baad humne FlatList ke componrnts ka use kiya jo hai
+ListHeaderComponent liya
+ye head me chijen dikhane ka kaam karta hai
+to iske humne andr Welcome back text or id naam se name jo aayega vo rakhenge
+
+aur idhar hi humne ek small logo bhi lga diya
+
+uske baad humne ek search inout bnaya jisme hum video ko search karenge, udhr search ke icons pr click karke 
+aur placeholder ko humne se "Search for a video topic"
+de diya
+
+humne same FontField wala code use kiya hsi
+bss apne according kuch changes karli hai
+
+ab humn verticall scrolling ke liye ek alg se section bnayenge jisme fir se data flastlist me lenge lekin  or <flatlist> ke end hone pr udhr horitantal likkh denge.
+jisse ye horizontak me chla jaayega.
+
+
+### ab hume empty video ke liye ek function bnayenge 
+agr maan lo koi video abhi tak kisi ne video add hi nhi ki
+toh usko udhr no video paand likha aayega sath hi udhr ke butto lga denge. jo humko create waale route par jaayega.
+
+
+### main kaam
+page ko niche ki side karne se refresh ho jaaye page automatical upadtes changes apply ho jaaye vo set karenge
+
+Ye hoga useState hook se. useState hook me hum refreshing(variable), setRefreshing(function) le lenge or isai by default false rakhenge.
+
+ab iss hook ka use hum refreshControl me karenge
+
+-> refreshControl humara page ke just upr lagega taaki page ko down karne se loading aa sake / refresh ho sake page.
+
+---
