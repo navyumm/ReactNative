@@ -1,41 +1,92 @@
-import { useState } from "react";
-import { View, Text, TextInput, TouchableOpacity, Image } from "react-native";
+import { Alert, FlatList, Image, RefreshControl, StatusBar, StyleSheet, Text, View } from 'react-native'
+import React, { useEffect, useState } from 'react'
+import { SafeAreaView } from 'react-native-safe-area-context'
 
-import { icons } from "../constants";
+import { images } from "../../constants";
+import SearchInput from '../../components/SearchInput';
+import Trending from '../../components/Trending';
+import EmptyState from '../../components/EmptyState';
 
-const SearchInput = ({
-    title,
-    value,
-    placeholder,
-    handleChangeText,
-    otherStyles,
-    ...props
-}) => {
-    const [showPassword, setShowPassword] = useState(false);
+import useAppwrite from '../../lib/useAppwrite';
+import VideoCard from '../../components/VideoCard';
+import { searchPosts } from '../lib/appwrite';
+import { useLocalSearchParams } from 'expo-router';
+
+const Search = () => {
+
+    const{ querry } = useLocalSearchParams()
+    const { data: posts, refetch } = useAppwrite(searchPosts(querry));
+    const { data: latestPosts } = useAppwrite(getLatestPosts);
+
+    const [refreshing, setRefreshing] = useState(false);
+
+    const onRefresh = async () => {
+        setRefreshing(true);
+        // re call videos -> if any new videos appeard
+        await refetch();
+        setRefreshing(false);
+    }
+
+    // console.log(posts);
 
     return (
-            <View className="w-full h-16 px-4 bg-black-100 rounded-2xl border-2 border-black-200 focus:border-secondary flex flex-row items-center text-center space-x-4">
-                <TextInput
-                    className="text-base pb-3 mt-0.5 text-white flex-1 font-pregular"
-                    value={value}
-                    placeholder="Search for a video topic"
-                    placeholderTextColor="#7B7B8B"
-                    onChangeText={handleChangeText}
-                    secureTextEntry={title === "Password" && !showPassword}
-                    {...props}
-                />
-
-                <TouchableOpacity>
-                    <Image 
-                        source={icons.search}
-                        className="w-6 h-10"
-                        resizeMode= 'contain'
+        <SafeAreaView className="bg-primary h-full">
+            <FlatList
+                data={posts}
+                // data={[]}
+                keyExtractor={(item) => item.$id}
+                renderItem={({ item }) => (
+                    // <Text className="text-3xl text-white">{item.title}</Text>
+                    <VideoCard 
+                        video={item}
                     />
+                )}
+                ListHeaderComponent={() => (
+                    <View className="my-6 px-4 space-y-6">
+                        <View className="justify-between items-start flex-row mb-6">
+                            <View>
+                                <Text className="font-pmedium text-sm text-gray-100">
+                                    Welcome Back
+                                </Text>
+                                <Text className="text-2xl font-psemibold text-white">
+                                    Navi
+                                </Text>
+                            </View>
 
-                </TouchableOpacity>
-            </View>
+                            <View className="mt-1.5">
+                                <Image
+                                    source={images.logoSmall}
+                                    className="w-9 h-10"
+                                    resizeMode="contain"
+                                />
+                            </View>
+                        </View>
 
-    );
-};
+                        <SearchInput />
 
-export default SearchInput;
+                        <View className="w-full flex-1 pt-5 pb-8">
+                            <Text className="text-gray-100 text-lg font-pregular mb-3">
+                                Latest Videos
+                            </Text>
+
+                            <Trending posts={ latestPosts ?? []} />
+
+                        </View>
+                    </View>
+                )}
+
+                ListEmptyComponent={() => (
+                    <EmptyState
+                        title="No Videos Found"
+                        subtitle="Be the first one to upload video"
+                    />
+                )}
+
+                refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
+            />
+        </SafeAreaView>
+    )
+}
+
+export default Search
+
