@@ -1,92 +1,39 @@
-import { Alert, FlatList, Image, RefreshControl, StatusBar, StyleSheet, Text, View } from 'react-native'
-import React, { useEffect, useState } from 'react'
-import { SafeAreaView } from 'react-native-safe-area-context'
+import { useState } from "react";
+import { router, usePathname } from "expo-router";
+import { View, TouchableOpacity, Image, TextInput, Alert } from "react-native";
 
-import { images } from "../../constants";
-import SearchInput from '../../components/SearchInput';
-import Trending from '../../components/Trending';
-import EmptyState from '../../components/EmptyState';
+import { icons } from "../constants";
 
-import useAppwrite from '../../lib/useAppwrite';
-import VideoCard from '../../components/VideoCard';
-import { searchPosts } from '../lib/appwrite';
-import { useLocalSearchParams } from 'expo-router';
-
-const Search = () => {
-
-    const{ querry } = useLocalSearchParams()
-    const { data: posts, refetch } = useAppwrite(searchPosts(querry));
-    const { data: latestPosts } = useAppwrite(getLatestPosts);
-
-    const [refreshing, setRefreshing] = useState(false);
-
-    const onRefresh = async () => {
-        setRefreshing(true);
-        // re call videos -> if any new videos appeard
-        await refetch();
-        setRefreshing(false);
-    }
-
-    // console.log(posts);
+const SearchInput = ({ initialQuery }) => {
+    const pathname = usePathname();
+    const [query, setQuery] = useState(initialQuery || "");
 
     return (
-        <SafeAreaView className="bg-primary h-full">
-            <FlatList
-                data={posts}
-                // data={[]}
-                keyExtractor={(item) => item.$id}
-                renderItem={({ item }) => (
-                    // <Text className="text-3xl text-white">{item.title}</Text>
-                    <VideoCard 
-                        video={item}
-                    />
-                )}
-                ListHeaderComponent={() => (
-                    <View className="my-6 px-4 space-y-6">
-                        <View className="justify-between items-start flex-row mb-6">
-                            <View>
-                                <Text className="font-pmedium text-sm text-gray-100">
-                                    Welcome Back
-                                </Text>
-                                <Text className="text-2xl font-psemibold text-white">
-                                    Navi
-                                </Text>
-                            </View>
-
-                            <View className="mt-1.5">
-                                <Image
-                                    source={images.logoSmall}
-                                    className="w-9 h-10"
-                                    resizeMode="contain"
-                                />
-                            </View>
-                        </View>
-
-                        <SearchInput />
-
-                        <View className="w-full flex-1 pt-5 pb-8">
-                            <Text className="text-gray-100 text-lg font-pregular mb-3">
-                                Latest Videos
-                            </Text>
-
-                            <Trending posts={ latestPosts ?? []} />
-
-                        </View>
-                    </View>
-                )}
-
-                ListEmptyComponent={() => (
-                    <EmptyState
-                        title="No Videos Found"
-                        subtitle="Be the first one to upload video"
-                    />
-                )}
-
-                refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
+        <View className="flex flex-row items-center space-x-4 w-full h-16 px-4 bg-black-100 rounded-2xl border-2 border-black-200 focus:border-secondary">
+            <TextInput
+                className="text-base mt-0.5 text-white flex-1 font-pregular"
+                value={query}
+                placeholder="Search a video topic"
+                placeholderTextColor="#CDCDE0"
+                onChangeText={(e) => setQuery(e)}
             />
-        </SafeAreaView>
-    )
-}
 
-export default Search
+            <TouchableOpacity
+                onPress={() => {
+                    if (query === "")
+                        return Alert.alert(
+                            "Missing Query",
+                            "Please input something to search results across database"
+                        );
 
+                    if (pathname.startsWith("/search")) router.setParams({ query });
+                    else router.push(`/search/${query}`);
+                }}
+            >
+                <Image source={icons.search} className="w-5 h-5" resizeMode="contain" />
+            </TouchableOpacity>
+        </View>
+    );
+};
+
+export default SearchInput;
