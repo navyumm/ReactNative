@@ -9,10 +9,6 @@ import SearchInput from "../../components/SearchInput"
 import EmptyState from "../../components/EmptyState"
 import VideoCard from "../../components/VideoCard"
 
-// import { EmptyState } from "../../components/EmptyState";
-// import {  VideoCard } from "../../components/VideoCard";
-// import { SearchInput } from "../../components/SearchInput";
-
 const Search = () => {
     const { query } = useLocalSearchParams();
     const { data: posts, refetch } = useAppwrite(
