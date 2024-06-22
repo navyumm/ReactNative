@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 
 import { images } from '../../constants';
-import FontField from '../../components/FontField';
+import FormField from '../../components/FormField';
 import { StatusBar } from 'expo-status-bar';
 import CustomButton from '../../components/CustomButton';
 import { Link, router } from 'expo-router';
@@ -59,7 +59,7 @@ const SignUp = () => {
 
                     <Text className="text-2xl text-white text-semibold mt-10 font-psemibold">Sign up to Aora</Text>
 
-                    <FontField
+                    <FormField
                         title="Username"
                         value={form.username}
                         handleChangeText={(e) => setForm({ ...form, username: e })}
@@ -67,7 +67,7 @@ const SignUp = () => {
                         // keyboardType="username-address"
                     />
 
-                    <FontField
+                    <FormField
                         title="Email"
                         value={form.email}
                         handleChangeText={(e) => setForm({ ...form, email: e })}
@@ -75,7 +75,7 @@ const SignUp = () => {
                         keyboardType="email-address"
                     />
 
-                    <FontField
+                    <FormField
                         title="Password"
                         value={form.password}
                         handleChangeText={(e) => setForm({ ...form, password: e })}
