@@ -5,15 +5,11 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 import useAppwrite from "../../lib/useAppwrite";
 import { searchPosts } from "../../lib/appwrite";
-import SearchInput from "../../components/SearchInput"
-import EmptyState from "../../components/EmptyState"
-import VideoCard from "../../components/VideoCard"
+import { EmptyState, SearchInput, VideoCard } from "../../components";
 
 const Search = () => {
     const { query } = useLocalSearchParams();
-    const { data: posts, refetch } = useAppwrite(
-        () => searchPosts(query)
-    );
+    const { data: posts, refetch } = useAppwrite(() => searchPosts(query));
 
     useEffect(() => {
         refetch();
@@ -44,7 +40,6 @@ const Search = () => {
                             </Text>
 
                             <View className="mt-6 mb-8">
-                            
                                 <SearchInput initialQuery={query} refetch={refetch} />
                             </View>
                         </View>
